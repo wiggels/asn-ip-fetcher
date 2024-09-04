@@ -60,13 +60,15 @@ async fn fetch_all_asns(asn_list: &Vec<String>) -> HashMap<String, AsnData> {
         if !data.ip_ranges.is_empty() {
             if data.ip_ranges.len() > 2000 {
                 for (i, chunk) in data.ip_ranges.chunks(2000).enumerate() {
-                    let asn_suffix = if i == 0 {
-                        asn.clone()
+                    let suffix = if i == 0 {
+                        "".to_string()
                     } else {
-                        format!("{}_{}", asn, i + 1)
+                        format!("_{}", i + 1)
                     };
+                    let asn_suffix = format!("{}{}", asn, suffix);
+                    let display_name_suffix = format!("{}{}", data.display_name, suffix);
                     asn_data.insert(asn_suffix, AsnData {
-                        display_name: data.display_name.clone(),
+                        display_name: display_name_suffix,
                         ip_ranges: chunk.to_vec(),
                     });
                 }

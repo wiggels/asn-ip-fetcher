@@ -58,7 +58,9 @@ async fn fetch_all_asns(asn_list: &Vec<String>, version: &str) -> HashMap<String
     let mut asn_data: HashMap<String, AsnData> = HashMap::new();
     for task in tasks {
         let (asn, data) = task.await.unwrap();
-        asn_data.insert(asn, data);
+        if !data.ip_ranges.is_empty() {
+            asn_data.insert(asn, data);
+        }
     }
     asn_data
 }

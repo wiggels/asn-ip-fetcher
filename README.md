@@ -1,4 +1,4 @@
-# ASN Data Fetcher
+# asn-ip-fetcher
 
 A Rust utility that fetches Autonomous System Number (ASN) data including display names and IP ranges from the [ipverse/asn-ip](https://github.com/ipverse/asn-ip) repository and outputs the results to a JSON file.
 
